@@ -1,0 +1,52 @@
+---
+title: "Feature Selection"
+author: "Ryan Zomorrodi"
+date: today
+format: dashboard
+---
+
+```{r, include = FALSE}
+library(tidyverse)
+library(gt)
+load("imp.RData")
+```
+
+## Row {height=40%}
+
+```{r}
+imp %>%
+    gt() %>%
+    opt_interactive()
+```
+
+## Row {height=60%}
+
+### Column
+
+```{r}
+#| title: Random Forest
+#| fig-height: 8
+
+ggplot(slice_max(imp, `Random Forest`, n = 50)) +
+    geom_col(aes(x = `Random Forest`, y = fct_reorder(feature, `Random Forest`))) +
+    labs(
+        title = "Random Forest Important Factors",
+        x = "Random Forest Impurity",
+        y = "Feature"
+    )
+```
+
+### Column
+
+```{r}
+#| title: Elastic Net
+#| fig-height: 8
+
+ggplot(filter(imp, `Elastic Net` != 0)) +
+    geom_col(aes(x = `Elastic Net`, y = fct_reorder(feature, `Elastic Net`))) +
+    labs(
+        title = "Elastic Net Important Factors",
+        x = "Elastic Net Coefficient",
+        y = "Feature"
+    )
+```

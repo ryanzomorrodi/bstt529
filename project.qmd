@@ -1,0 +1,77 @@
+---
+title: "Predicting Depression Among Veterans Using Health Care Data"
+format: html
+---
+
+
+```{r}
+library(tidyverse)
+
+depression <- read_csv("Depression(in).csv")
+
+df <- depression %>%    
+    filter(veteran == "Yes") %>%
+    select(depression, gender, age, race, education_level, marital_status, BMI, trouble_sleeping_history, memory_problems) %>%
+    mutate(gender = case_match(gender, 0 ~ "Male", 1 ~ "Female")) %>%
+    mutate(education_level = case_match(education_level, 
+        0 ~ NA,
+        1 ~ "Less than 9th grade",
+        2 ~ "9-11th grade (Includes 12th grade with no diploma)",
+        3 ~ "High school graduate/GED or equivalent",
+        4 ~ "Some college",
+        5 ~ "College graduate or above"
+    )) %>%
+    mutate(trouble_sleeping_history = case_match(trouble_sleeping_history, 0 ~ "Yes", 1 ~ "No")) %>%
+    mutate(memory_problems = case_match(memory_problems, 0 ~ "Yes", 1 ~ "No")) %>%
+    mutate(BMI = case_when(BMI == 0 ~ NA, .default = BMI)) %>% 
+    mutate(BMI_class = case_when(
+        is.na(BMI) ~ NA,
+        BMI < 18.5 ~ "Underweight",
+        BMI < 25 ~ "Normal",
+        BMI < 30 ~ "Overweight",
+        BMI >= 30 ~ "Obese"
+    )) %>%
+    mutate(age_class = case_when(
+        age >= 18 & age <= 39 ~ "Young adult",
+        age >= 40 & age <= 64 ~ "Middle-aged adult",
+        age >= 65 ~ "Older adult"
+    )) %>%
+    mutate(
+        marital_status = case_match(marital_status,
+            "Missing" ~ NA,
+            .default = marital_status
+        )
+    )
+```
+
+```{r}
+library(gtsummary)
+
+df %>%
+    relocate(
+        gender, 
+        age_class, 
+        race, 
+        education_level, 
+        marital_status, 
+        BMI_class, 
+        memory_problems, 
+        trouble_sleeping_history
+    ) %>%
+    select(where(is.character)) %>%
+    rename(
+        BMI = BMI_class,
+        Age = age_class,
+        Gender = gender,
+        Race = race,
+        `Educational Attainment` = education_level,
+        `Martial Status` = marital_status,
+        `Memory Problems` = memory_problems,
+        `History of Trouble Sleeping` = trouble_sleeping_history
+    ) %>%
+    tbl_summary(by = depression) |>
+    add_p(pvalue_fun = label_style_pvalue(digits = 2)) |>
+    add_overall() %>%
+    modify_spanning_header(c("stat_1", "stat_2") ~ "**Depresssion Status**")
+
+```

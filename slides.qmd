@@ -1,0 +1,350 @@
+---
+title: "Predicting Depression Among Veterans Using Health Care Data"
+author: "Ryan Zomorrodi"
+date: today
+format:
+    clean-revealjs: default
+bibliography: "assets/citations.bib"
+---
+
+## Background
+
+
+- Depression is a major mental health challenge among U.S. veterans.
+- In 2008, Veterans Affairs [@u.s._department_of_veterans_affairs_va_2016] estimated that among veterans visiting primary care clinics
+    - 1 in 3 veterans have some symptoms of depression
+    - 1 in 5 have serious symptoms
+    - 1 in 8 to 10 have major depression
+
+
+## Potential Causes of Depression Among Veterans
+
+::::::: columns
+::::: {.column width="50%"}
+- Exposure to violence, death, and trauma
+- Physical injuries [@veterans_affairs_psychological_2015]
+- Transition challenges [@bond_transition_2022]
+- Substance abuse [@national_institute_on_drug_abuse_substance_2019]
+:::::
+
+::::: {.column width="50%"}
+![](assets/veteran.jpg)
+:::::
+:::::::
+
+## Depression Prediction with Healthcare Data
+
+- Given the high prevalence of depression among veterans, it is import that healthcare providers pay special attention to their mental health
+- A specialized prediction model for veterans may allow healthcare practitioners to identify veteran-specific characteristics that are associated with higher risk of depressive
+
+## Data Background
+
+::::::: columns
+::::: {.column width="50%"}
+- 2005 to 2018 Centers for Disease Control and Prevention National health and Nutrition Examination Survey (NHANES)
+- NHANES is a national representative survey conducted by the National Center for Health Statistics (NCHS), which includes:
+    - Health exams
+    - Laboratory tests
+    - Dietary interviews
+:::::
+
+::::: {.column width="50%"}
+![](assets/nhanes.avif)
+:::::
+:::::::
+
+## Data Background (cont.)
+
+- The total dataset was filtered to include only veterans
+- There are 3,929 samples and 490 predictors
+- Special attention will be payed toward the memory issues and trouble sleeping predictors
+
+## Summary of Selected Demographic Characteristics
+
+```{r}
+#| include: false
+
+library(tidyverse)
+library(gt)
+library(gtsummary)
+library(ryr) # personal package
+
+depression <- read_csv("data/depression.csv")
+
+df <- depression %>%
+    filter(veteran == "Yes") %>%
+    mutate(depression = factor(
+        depression, 
+        levels = c("Not Depressed", "Depressed")
+    )) %>%
+    mutate(gender = fct_case_match(gender, 
+        0 ~ "Male", 
+        1 ~ "Female"
+    )) %>%
+    mutate(age_class = fct_case_when(
+        age >= 18 & age <= 39 ~ "Young adult",
+        age >= 40 & age <= 64 ~ "Middle-aged adult",
+        age >= 65 ~ "Older adult"
+    )) %>%
+    mutate(race = factor(
+        race,
+        levels = c("White", "Black", "Mexican", "Other Hispanic", "Other and Multiracial")
+    )) %>%
+    mutate(education_level = fct_case_match(education_level, 
+        0 ~ NA,
+        c(1, 2) ~ "No high school diploma",
+        3 ~ "High school graduate",
+        c(4, 5) ~ "College graduate or above"
+    )) %>%
+    mutate(marital_status = fct_case_match(marital_status,
+        "Missing" ~ NA,
+        "Married" ~ "Married",
+        .default = "Other"
+    )) %>%
+    mutate(BMI = na_if(BMI, 0)) %>%
+    mutate(BMI_class = fct_case_when(
+        is.na(BMI) ~ NA,
+        BMI < 18.5 ~ "Underweight",
+        BMI < 25 ~ "Normal",
+        BMI < 30 ~ "Overweight",
+        BMI >= 30 ~ "Obese"
+    )) %>%
+    mutate(memory_problems = fct_case_match(memory_problems, 
+        0 ~ "No", 
+        1 ~ "Yes"
+    )) %>%
+    mutate(trouble_sleeping_history = fct_case_match(trouble_sleeping_history,
+        0 ~ "No", 
+        1 ~ "Yes"
+    )) %>%
+    select(depression, gender, age_class, race, education_level, marital_status, BMI_class, trouble_sleeping_history, memory_problems)
+
+get_summary_table <- function(df, by) {
+    df %>%
+        tbl_summary(by = {{ by }}, type = all_dichotomous() ~ "categorical") %>%
+        add_p(pvalue_fun = label_style_pvalue(digits = 2)) %>%
+        add_overall() %>%
+        modify_spanning_header(c("stat_1", "stat_2") ~ "**Depresssion Status**") %>%
+        bold_labels() %>%
+        as_gt() %>%
+        tab_options(table.width = pct(100)) %>%
+        text_transform(
+            locations = cells_body(columns = label),
+            fn = function(labels) {
+                map_if(
+                    labels,
+                    .p = \(x) !str_starts(x , "[:space:]"),
+                    .f = function (x) {
+                        x %>%
+                            str_remove("_class") %>%
+                            str_replace_all("_", " ") %>%
+                            tools::toTitleCase()
+                    }
+                )
+            }
+        )
+}
+```
+
+
+```{r}
+#| echo: false
+
+df %>%
+    select(depression, gender, age_class, race) %>%
+    get_summary_table(by = depression)
+```
+
+## Summary of Selected Demographic Characteristics (cont.)
+
+```{r}
+#| echo: false
+
+df %>%
+    select(depression, marital_status, education_level) %>%
+    get_summary_table(by = depression)
+```
+
+## Summary of Selected Clinical Characteristics
+
+```{r}
+#| echo: false
+
+df %>%
+    select(depression, BMI_class, memory_problems, trouble_sleeping_history) %>%
+    get_summary_table(by = depression)
+```
+
+## Bivariate Analysis
+
+- Depression is highest amongst young and middle-aged adults
+- Depression is highest amongst people of color
+
+::::::: columns
+::::: {.column width="50%"}
+```{r}
+depression_rate <- mean(df$depression == "Depressed")
+
+age_rates <- df %>%
+    group_by(age_class) %>%
+    summarize(
+        n_depressed = sum(depression == "Depressed"),
+        estimate = n_depressed / n(),
+        lower = prop.test(x = n_depressed, n = n())$conf.int[1],
+        upper = prop.test(x = n_depressed, n = n())$conf.int[2]
+    )
+
+
+ggplot(age_rates, aes(x = factor(age_class, levels = c("Young adult", "Middle-aged adult", "Older adult")), y = estimate)) +
+    geom_hline(yintercept = depression_rate, col = "red", alpha = .35, lty = 2) + 
+    geom_point() +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = .1) +
+    theme(axis.text = element_text(size = 8)) +
+    labs(
+        x = "Age",
+        y = "Proportion Depressed"
+    )
+```
+:::::
+
+::::: {.column width="50%"}
+```{r}
+race_rates <- df %>%
+    group_by(race) %>%
+    summarize(
+        n_depressed = sum(depression == "Depressed"),
+        estimate = n_depressed / n(),
+        lower = prop.test(x = n_depressed, n = n())$conf.int[1],
+        upper = prop.test(x = n_depressed, n = n())$conf.int[2]
+    )
+
+
+ggplot(race_rates, aes(x = race, y = estimate)) +
+    geom_hline(yintercept = depression_rate, col = "red", alpha = .35, lty = 2) + 
+    geom_point() +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = .1) +
+    theme(axis.text = element_text(size = 8)) +
+    labs(
+        x = "Race",
+        y = "Proportion Depressed"
+    )
+```
+:::::
+:::::::
+
+## Bivariate Analysis
+
+- Depression is about 40% lower among married veterans
+- Depression is much higher among those without a high school diploma
+
+::::::: columns
+::::: {.column width="50%"}
+```{r}
+marital_rates <- df %>%
+    filter(!is.na(marital_status)) %>%
+    group_by(marital_status) %>%
+    summarize(
+        n_depressed = sum(depression == "Depressed"),
+        estimate = n_depressed / n(),
+        lower = prop.test(x = n_depressed, n = n())$conf.int[1],
+        upper = prop.test(x = n_depressed, n = n())$conf.int[2]
+    )
+
+
+ggplot(marital_rates, aes(x = marital_status, y = estimate)) +
+    geom_hline(yintercept = depression_rate, col = "red", alpha = .35, lty = 2) + 
+    geom_point() +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = .1) +
+    theme(axis.text = element_text(size = 8)) +
+    labs(
+        x = "Marital Status",
+        y = "Proportion Depressed"
+    )
+```
+:::::
+
+::::: {.column width="50%"}
+```{r}
+education_rates <- df %>%
+    filter(!is.na(education_level)) %>%
+    group_by(education_level) %>%
+    summarize(
+        n_depressed = sum(depression == "Depressed"),
+        estimate = n_depressed / n(),
+        lower = prop.test(x = n_depressed, n = n())$conf.int[1],
+        upper = prop.test(x = n_depressed, n = n())$conf.int[2]
+    )
+
+
+ggplot(education_rates, aes(x = education_level, y = estimate)) +
+    geom_hline(yintercept = depression_rate, col = "red", alpha = .35, lty = 2) + 
+    geom_point() +
+    geom_errorbar(aes(ymin = lower, ymax = upper), width = .1) +
+    theme(axis.text = element_text(size = 8)) +
+    labs(
+        x = "Marital Status",
+        y = "Proportion Depressed"
+    )
+```
+:::::
+:::::::
+
+## Bivariate Analysis
+
+- Obesity is most prevalent amongst middle-aged individuals
+
+```{r}
+library(ggmosaic)
+
+df %>%
+    filter(!is.na(BMI_class)) %>%
+    group_by(age_class, BMI_class) %>%
+    summarize(n = n()) %>%
+    ggplot() +
+    geom_mosaic(aes(x = product(age_class), fill = BMI_class, weight = n), show.legend = FALSE) +
+    theme_mosaic() +
+    labs(
+        x = "Age",
+        y = "BMI"
+    )
+```
+
+## Bivariate Analysis
+
+- Younger veterans tend to have more education
+
+```{r}
+library(ggmosaic)
+
+df %>%
+    filter(!is.na(education_level)) %>%
+    group_by(age_class, education_level) %>%
+    summarize(n = n()) %>%
+    ggplot() +
+    geom_mosaic(aes(x = product(age_class), fill = education_level, weight = n), show.legend = FALSE) +
+    theme_mosaic() +
+    labs(
+        x = "Age",
+        y = "Education"
+    )
+```
+## Bivariate Analysis
+
+- Within this dataset, individuals with a history of trouble sleeping are also more likely to have memory problems
+
+```{r}
+library(ggmosaic)
+
+df %>%
+    group_by(trouble_sleeping_history, memory_problems) %>%
+    summarize(n = n()) %>%
+    ggplot() +
+    geom_mosaic(aes(x = product(trouble_sleeping_history), fill = memory_problems, weight = n), show.legend = FALSE) +
+    theme_mosaic() +
+    labs(
+        x = "History of Trouble Sleeping",
+        y = "Memory Problems"
+    )
+```
+
+## References

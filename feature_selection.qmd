@@ -1,0 +1,161 @@
+
+
+## Feature Selection Methods
+### Filter Methods
+
+**Information gain** - Calculates how well a given feature is able to reduce entropy.
+
+### Embedded
+
+**Boruta** - Shuffles the values of each feature, creating "shadow features". Fits a random forest with the original features and "shadow features". If an original feature's importance is greater than that of the maximum "shadow feature", then it is labeled important. Does this many times until not features are added.
+**Random Forest**
+**Elastic Net**
+**XGBoost**
+
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(finetune)
+library(themis)
+library(colino)
+library(gt)
+```
+
+```{r}
+df <- arrow::read_parquet("data/depression.parquet")
+```
+
+```{r}
+df_preped <- recipe(df, depression ~ .) %>%
+    step_select(-SEQN) %>%
+    step_filter(veteran == "Yes") %>%
+    step_zv(all_predictors()) %>%
+    step_impute_bag(
+        seed_val = 123,
+        c(where(~ any(is.na(.x))), -ends_with("cancer_type")),
+        impute_with = imp_vars(-c(starts_with("Rx"), ends_with("cancer_type")))
+    ) %>%
+    prep() %>%
+    juice()
+```
+
+```{r}
+set.seed(234)
+df_folds <- vfold_cv(df_preped, strata = depression, repeats = 5)
+```
+
+```{r}
+rec_def <- recipe(df_preped, depression ~ .) %>%
+    step_nzv(all_predictors()) %>%
+    step_dummy_multi_choice(ends_with("cancer_type")) %>%
+    step_dummy(all_factor_predictors()) %>%
+    step_zv(all_predictors()) %>%
+    step_smote(depression)
+
+rec_nor <- rec_def %>%
+    step_normalize(all_predictors())
+```
+
+```{r}
+spec_lr <- logistic_reg(
+    penalty = tune(),
+    mixture = tune()
+) %>%
+    set_engine("glmnet") %>%
+    set_mode("classification")
+
+spec_rf <- rand_forest(
+    mtry = tune(),
+    trees = 1000,
+    min_n = tune()
+) %>%
+    set_engine("ranger", importance = "impurity") %>%
+    set_mode("classification")
+```
+
+```{r}
+wflw_set <- workflow_set(
+    preproc = list(normalization = rec_nor, default = rec_def),
+    models = list(elastic_net = spec_lr, random_forest = spec_rf),
+    cross = FALSE
+)
+```
+
+```{r}
+race_ctrl <- control_race(
+    parallel_over = "everything",
+    save_workflow = TRUE,
+    verbose = TRUE
+)
+
+results <- wflw_set %>%
+    workflow_map(
+        "tune_race_anova",
+        seed = 345,
+        resamples = df_folds,
+        grid = 20,
+        verbose = TRUE,
+        control = race_ctrl
+    )
+```
+
+```{r}
+best_res_lr <- results %>% 
+    extract_workflow_set_result("normalization_elastic_net") %>% 
+    select_best(metric = "roc_auc")
+
+best_wflw_lr <- results %>% 
+    extract_workflow("normalization_elastic_net") %>% 
+    finalize_workflow(best_res_lr)
+
+imp_lr <- best_wflw_lr %>%
+    fit(df_preped) %>%
+    extract_fit_parsnip() %>%
+    pull_importances()
+```
+
+```{r}
+best_res_rf <- results %>% 
+    extract_workflow_set_result("default_random_forest") %>% 
+    select_best(metric = "roc_auc")
+
+best_wflw_rf <- results %>% 
+    extract_workflow("default_random_forest") %>% 
+    finalize_workflow(best_res_rf)
+
+imp_rf <- best_wflw_rf %>%
+    fit(df_preped) %>%
+    extract_fit_parsnip() %>%
+    pull_importances()
+```
+
+```{r}
+imp <- left_join(
+    imp_lr, 
+    imp_rf, 
+    by = join_by(feature == feature),
+    suffix = c("_lr", "_rf")
+) %>%
+    arrange(desc(abs(importance_lr))) %>%
+    rename(`Elastic Net` = importance_lr, `Random Forest` = importance_rf)
+
+imp %>%
+    gt() %>%
+    opt_interactive()
+
+ggplot(slice_max(imp, `Random Forest`, n = 50)) +
+    geom_col(aes(x = `Random Forest`, y = fct_reorder(feature, `Random Forest`))) +
+    labs(
+        title = "Random Forest Important Factors",
+        x = "Random Forest Impurity",
+        y = "Feature"
+    )
+
+ggplot(filter(imp, `Elastic Net` != 0)) +
+    geom_col(aes(x = `Elastic Net`, y = fct_reorder(feature, `Elastic Net`))) +
+    labs(
+        title = "Elastic Net Important Factors",
+        x = "Elastic Net Coefficient",
+        y = "Feature"
+    )
+```
