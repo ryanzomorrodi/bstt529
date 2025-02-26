@@ -33,7 +33,7 @@ ggplot(slice_max(imp, `Random Forest`, n = 50)) +
     geom_col(aes(x = `Random Forest`, y = fct_reorder(feature, `Random Forest`))) +
     labs(
         title = "Random Forest Important Factors",
-        x = "Random Forest Mean Decrease Impurity",
+        x = "Mean Decrease Impurity",
         y = "Feature"
     )
 ```
@@ -48,7 +48,7 @@ ggplot(filter(imp, `Elastic Net` != 0)) +
     geom_col(aes(x = `Elastic Net`, y = fct_reorder(feature, `Elastic Net`))) +
     labs(
         title = "Elastic Net Important Factors",
-        x = "Elastic Net Coefficient",
+        x = "Coefficient",
         y = "Feature"
     )
 ```
