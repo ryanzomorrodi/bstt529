@@ -33,7 +33,7 @@ ggplot(slice_max(imp, `Random Forest`, n = 50)) +
     geom_col(aes(x = `Random Forest`, y = fct_reorder(feature, `Random Forest`))) +
     labs(
         title = "Random Forest Important Factors",
-        x = "Mean Decrease Impurity",
+        x = "Mean Decrease Impurity (Scaled)",
         y = "Feature"
     )
 ```
@@ -48,7 +48,7 @@ ggplot(slice_max(imp, `Light GBM`, n = 50)) +
     geom_col(aes(x = `Light GBM`, y = fct_reorder(feature, `Light GBM`))) +
     labs(
         title = "Light GBM Important Factors",
-        x = "Gain",
+        x = "Gain (Scaled)",
         y = "Feature"
     )
 ```
