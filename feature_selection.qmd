@@ -57,6 +57,8 @@ rec_nor <- rec_def %>%
 ```
 
 ```{r}
+library(bonsai)
+
 spec_lr <- logistic_reg(
     penalty = tune(),
     mixture = tune()
@@ -71,6 +73,18 @@ spec_rf <- rand_forest(
 ) %>%
     set_engine("ranger", importance = "impurity") %>%
     set_mode("classification")
+
+spec_xg <- boost_tree(
+    mtry = tune(),
+    trees = 1000,
+    min_n = tune(),
+    tree_depth = tune(),
+    learn_rate = tune(),
+    loss_reduction = tune(),
+    sample_size = tune(),
+) %>%
+    set_engine("lightgbm") %>%
+    set_mode("classification")
 ```
 
 ```{r}
@@ -78,6 +92,11 @@ wflw_set <- workflow_set(
     preproc = list(normalization = rec_nor, default = rec_def),
     models = list(elastic_net = spec_lr, random_forest = spec_rf),
     cross = FALSE
+)
+
+wflw_set <- workflow_set(
+    preproc = list(default = rec_def),
+    models = list(light_gbm = spec_xg)
 )
 ```
 
@@ -130,32 +149,36 @@ imp_rf <- best_wflw_rf %>%
 ```
 
 ```{r}
-imp <- left_join(
-    imp_lr, 
-    imp_rf, 
-    by = join_by(feature == feature),
-    suffix = c("_lr", "_rf")
-) %>%
-    arrange(desc(abs(importance_lr))) %>%
-    rename(`Elastic Net` = importance_lr, `Random Forest` = importance_rf)
+best_res_xg <- results %>% 
+    extract_workflow_set_result("default_light_gbm") %>% 
+    select_best(metric = "roc_auc")
 
-imp %>%
-    gt() %>%
-    opt_interactive()
+best_wflw_xg <- results %>% 
+    extract_workflow("default_light_gbm") %>% 
+    finalize_workflow(best_res_xg)
 
-ggplot(slice_max(imp, `Random Forest`, n = 50)) +
-    geom_col(aes(x = `Random Forest`, y = fct_reorder(feature, `Random Forest`))) +
-    labs(
-        title = "Random Forest Important Factors",
-        x = "Random Forest Impurity",
-        y = "Feature"
+pull_importances._lgb.Booster <- function(
+    object,
+    scaled = TRUE,
+    type = "Gain",
+    ...) {
+
+    call <- rlang::call2(
+        .fn = "lgb.importance",
+        .ns = "lightgbm",
+        model = object$fit
     )
+    scores <- rlang::eval_tidy(call)
+    scores <- tibble(feature = scores$Feature, importance = scores[[type]])
 
-ggplot(filter(imp, `Elastic Net` != 0)) +
-    geom_col(aes(x = `Elastic Net`, y = fct_reorder(feature, `Elastic Net`))) +
-    labs(
-        title = "Elastic Net Important Factors",
-        x = "Elastic Net Coefficient",
-        y = "Feature"
-    )
+    if (scaled)
+        scores$importance <- rescale(scores$importance)
+
+    scores
+}
+
+imp_rf <- best_wflw_xg %>%
+    fit(df_preped) %>%
+    extract_fit_parsnip() %>%
+    pull_importances()
 ```

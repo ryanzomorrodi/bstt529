@@ -41,6 +41,21 @@ ggplot(slice_max(imp, `Random Forest`, n = 50)) +
 ### Column
 
 ```{r}
+#| title: Light GBM
+#| fig-height: 8
+
+ggplot(slice_max(imp, `Light GBM`, n = 50)) +
+    geom_col(aes(x = `Light GBM`, y = fct_reorder(feature, `Light GBM`))) +
+    labs(
+        title = "Light GBM Important Factors",
+        x = "Gain",
+        y = "Feature"
+    )
+```
+
+### Column
+
+```{r}
 #| title: Elastic Net
 #| fig-height: 8
 
@@ -58,11 +73,14 @@ ggplot(filter(imp, `Elastic Net` != 0)) +
 1. Features with near zero variance were filtered out
 2. Imputation was performed with bagging
 3. Oversampling of the under-represented class was performed using SMOTE
-4. Elastic Net and Random Forest were tuned and fit
+4. Random Forest, Light GBM, and Elastic Net were tuned and fit
     - Random Forest
         - ROC AUC: 0.846
         - Accuracy: 0.933
+    - Light GBM
+        - ROC AUC: 0.852
+        - Accuracy: 0.925
     - Elastic Net
         - ROC AUC: 0.845
-        - Accuracy: 0.933
+        - Accuracy: 0.819
 
