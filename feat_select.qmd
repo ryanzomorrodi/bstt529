@@ -5,6 +5,8 @@ date: today
 format: dashboard
 ---
 
+# Results
+
 ```{r, include = FALSE}
 library(tidyverse)
 library(gt)
@@ -31,7 +33,7 @@ ggplot(slice_max(imp, `Random Forest`, n = 50)) +
     geom_col(aes(x = `Random Forest`, y = fct_reorder(feature, `Random Forest`))) +
     labs(
         title = "Random Forest Important Factors",
-        x = "Random Forest Impurity",
+        x = "Random Forest Mean Decrease Impurity",
         y = "Feature"
     )
 ```
@@ -50,3 +52,17 @@ ggplot(filter(imp, `Elastic Net` != 0)) +
         y = "Feature"
     )
 ```
+
+# Methods
+
+1. Features with near zero variance were filtered out
+2. Imputation was performed with bagging
+3. Oversampling of the under-represented class was performed using SMOTE
+4. Elastic Net and Random Forest were tuned and fit
+    - Random Forest
+        - ROC AUC: 0.846
+        - Accuracy: 0.933
+    - Elastic Net
+        - ROC AUC: 0.845
+        - Accuracy: 0.933
+
