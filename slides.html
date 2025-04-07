@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.6.40">
 
   <meta name="author" content="Ryan Zomorrodi">
-  <meta name="dcterms.date" content="2025-02-23">
+  <meta name="dcterms.date" content="2025-04-07">
   <title>Predicting Depression Among Veterans Using Health Care Data</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -142,6 +142,13 @@
       margin-right: 0; 
     }
   </style>
+  <script src="slides_files/libs/core-js-2.5.3/shim.min.js"></script>
+  <script src="slides_files/libs/react-18.2.0/react.min.js"></script>
+  <script src="slides_files/libs/react-18.2.0/react-dom.min.js"></script>
+  <script src="slides_files/libs/reactwidget-2.0.0/react-tools.js"></script>
+  <script src="slides_files/libs/htmlwidgets-1.6.4/htmlwidgets.js"></script>
+  <link href="slides_files/libs/reactable-0.4.4/reactable.css" rel="stylesheet">
+  <script src="slides_files/libs/reactable-binding-0.4.4/reactable.js"></script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -158,13 +165,13 @@ Ryan Zomorrodi
 </div>
 </div>
 
-  <p class="date">February 23, 2025</p>
+  <p class="date">April 7, 2025</p>
 </section>
 <section id="background" class="slide level2">
 <h2>Background</h2>
 <ul>
 <li>Depression is a major mental health challenge among U.S. veterans.</li>
-<li>In 2008, Veterans Affairs <span class="citation" data-cites="u.s._department_of_veterans_affairs_va_2016">(<a href="#/references" role="doc-biblioref" onclick="">U.S. Department of Veterans Affairs 2016</a>)</span> estimated that among veterans visiting primary care clinics
+<li>In 2008, Veterans Affairs <span class="citation" data-cites="u.s._department_of_veterans_affairs_va_2016">(<a href="#/references" role="doc-biblioref" onclick="">U.S. Department of Veterans Affairs 2016</a>)</span> estimated that among veterans visiting primary care clinics:
 <ul>
 <li>1 in 3 veterans have some symptoms of depression</li>
 <li>1 in 5 have serious symptoms</li>
@@ -189,8 +196,8 @@ Ryan Zomorrodi
 <section id="depression-prediction-with-healthcare-data" class="slide level2">
 <h2>Depression Prediction with Healthcare Data</h2>
 <ul>
-<li>Given the high prevalence of depression among veterans, it is import that healthcare providers pay special attention to their mental health</li>
-<li>A specialized prediction model for veterans may allow healthcare practitioners to identify veteran-specific characteristics that are associated with higher risk of depressive</li>
+<li>Given the high prevalence of depression among veterans, it is import that healthcare providers pay special attention to their mental health.</li>
+<li>A specialized prediction model for veterans may allow healthcare practitioners to identify veteran-specific characteristics that are associated with higher risk of depressive.</li>
 </ul>
 </section>
 <section id="data-background" class="slide level2">
@@ -198,7 +205,7 @@ Ryan Zomorrodi
 <div class="columns">
 <div class="column" style="width:50%;">
 <ul>
-<li>2005 to 2018 Centers for Disease Control and Prevention National health and Nutrition Examination Survey (NHANES)</li>
+<li>2005 to 2018 Centers for Disease Control and Prevention National health and Nutrition Examination Survey (NHANES).</li>
 <li>NHANES is a national representative survey conducted by the National Center for Health Statistics (NCHS), which includes:
 <ul>
 <li>Health exams</li>
@@ -213,39 +220,39 @@ Ryan Zomorrodi
 <section id="data-background-cont." class="slide level2">
 <h2>Data Background (cont.)</h2>
 <ul>
-<li>The total dataset was filtered to include only veterans</li>
-<li>There are 3,929 samples and 490 predictors</li>
-<li>Special attention will be payed toward the memory issues and trouble sleeping predictors</li>
+<li>The total dataset was filtered to include only veterans.</li>
+<li>There are 3,929 samples and 490 predictors.</li>
+<li>Special attention will be payed toward the memory issues and trouble sleeping predictors.</li>
 </ul>
 </section>
 <section id="summary-of-selected-demographic-characteristics" class="slide level2">
 <h2>Summary of Selected Demographic Characteristics</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="phrbfgzcxu" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#phrbfgzcxu table {
+<div id="piljblvdsc" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#piljblvdsc table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#phrbfgzcxu thead, #phrbfgzcxu tbody, #phrbfgzcxu tfoot, #phrbfgzcxu tr, #phrbfgzcxu td, #phrbfgzcxu th {
+#piljblvdsc thead, #piljblvdsc tbody, #piljblvdsc tfoot, #piljblvdsc tr, #piljblvdsc td, #piljblvdsc th {
   border-style: none;
 }
 
-#phrbfgzcxu p {
+#piljblvdsc p {
   margin: 0;
   padding: 0;
 }
 
-#phrbfgzcxu .gt_table {
+#piljblvdsc .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -264,12 +271,12 @@ Ryan Zomorrodi
   border-left-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_caption {
+#piljblvdsc .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#phrbfgzcxu .gt_title {
+#piljblvdsc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -281,7 +288,7 @@ Ryan Zomorrodi
   border-bottom-width: 0;
 }
 
-#phrbfgzcxu .gt_subtitle {
+#piljblvdsc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -293,7 +300,7 @@ Ryan Zomorrodi
   border-top-width: 0;
 }
 
-#phrbfgzcxu .gt_heading {
+#piljblvdsc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -305,13 +312,13 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_bottom_border {
+#piljblvdsc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_col_headings {
+#piljblvdsc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -326,7 +333,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_col_heading {
+#piljblvdsc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -346,7 +353,7 @@ Ryan Zomorrodi
   overflow-x: hidden;
 }
 
-#phrbfgzcxu .gt_column_spanner_outer {
+#piljblvdsc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -358,15 +365,15 @@ Ryan Zomorrodi
   padding-right: 4px;
 }
 
-#phrbfgzcxu .gt_column_spanner_outer:first-child {
+#piljblvdsc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#phrbfgzcxu .gt_column_spanner_outer:last-child {
+#piljblvdsc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#phrbfgzcxu .gt_column_spanner {
+#piljblvdsc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -378,11 +385,11 @@ Ryan Zomorrodi
   width: 100%;
 }
 
-#phrbfgzcxu .gt_spanner_row {
+#piljblvdsc .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#phrbfgzcxu .gt_group_heading {
+#piljblvdsc .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -408,7 +415,7 @@ Ryan Zomorrodi
   text-align: left;
 }
 
-#phrbfgzcxu .gt_empty_group_heading {
+#piljblvdsc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -423,15 +430,15 @@ Ryan Zomorrodi
   vertical-align: middle;
 }
 
-#phrbfgzcxu .gt_from_md > :first-child {
+#piljblvdsc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#phrbfgzcxu .gt_from_md > :last-child {
+#piljblvdsc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#phrbfgzcxu .gt_row {
+#piljblvdsc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -450,7 +457,7 @@ Ryan Zomorrodi
   overflow-x: hidden;
 }
 
-#phrbfgzcxu .gt_stub {
+#piljblvdsc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -463,7 +470,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#phrbfgzcxu .gt_stub_row_group {
+#piljblvdsc .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -477,15 +484,15 @@ Ryan Zomorrodi
   vertical-align: top;
 }
 
-#phrbfgzcxu .gt_row_group_first td {
+#piljblvdsc .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#phrbfgzcxu .gt_row_group_first th {
+#piljblvdsc .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#phrbfgzcxu .gt_summary_row {
+#piljblvdsc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -495,16 +502,16 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#phrbfgzcxu .gt_first_summary_row {
+#piljblvdsc .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_first_summary_row.thick {
+#piljblvdsc .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#phrbfgzcxu .gt_last_summary_row {
+#piljblvdsc .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -514,7 +521,7 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_grand_summary_row {
+#piljblvdsc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -524,7 +531,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#phrbfgzcxu .gt_first_grand_summary_row {
+#piljblvdsc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -534,7 +541,7 @@ Ryan Zomorrodi
   border-top-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_last_grand_summary_row_top {
+#piljblvdsc .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -544,11 +551,11 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_striped {
+#piljblvdsc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#phrbfgzcxu .gt_table_body {
+#piljblvdsc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -557,7 +564,7 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_footnotes {
+#piljblvdsc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -571,7 +578,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_footnote {
+#piljblvdsc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -580,7 +587,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#phrbfgzcxu .gt_sourcenotes {
+#piljblvdsc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -594,7 +601,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#phrbfgzcxu .gt_sourcenote {
+#piljblvdsc .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -602,72 +609,72 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#phrbfgzcxu .gt_left {
+#piljblvdsc .gt_left {
   text-align: left;
 }
 
-#phrbfgzcxu .gt_center {
+#piljblvdsc .gt_center {
   text-align: center;
 }
 
-#phrbfgzcxu .gt_right {
+#piljblvdsc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#phrbfgzcxu .gt_font_normal {
+#piljblvdsc .gt_font_normal {
   font-weight: normal;
 }
 
-#phrbfgzcxu .gt_font_bold {
+#piljblvdsc .gt_font_bold {
   font-weight: bold;
 }
 
-#phrbfgzcxu .gt_font_italic {
+#piljblvdsc .gt_font_italic {
   font-style: italic;
 }
 
-#phrbfgzcxu .gt_super {
+#piljblvdsc .gt_super {
   font-size: 65%;
 }
 
-#phrbfgzcxu .gt_footnote_marks {
+#piljblvdsc .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#phrbfgzcxu .gt_asterisk {
+#piljblvdsc .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#phrbfgzcxu .gt_indent_1 {
+#piljblvdsc .gt_indent_1 {
   text-indent: 5px;
 }
 
-#phrbfgzcxu .gt_indent_2 {
+#piljblvdsc .gt_indent_2 {
   text-indent: 10px;
 }
 
-#phrbfgzcxu .gt_indent_3 {
+#piljblvdsc .gt_indent_3 {
   text-indent: 15px;
 }
 
-#phrbfgzcxu .gt_indent_4 {
+#piljblvdsc .gt_indent_4 {
   text-indent: 20px;
 }
 
-#phrbfgzcxu .gt_indent_5 {
+#piljblvdsc .gt_indent_5 {
   text-indent: 25px;
 }
 
-#phrbfgzcxu .katex-display {
+#piljblvdsc .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#phrbfgzcxu div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#piljblvdsc div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -690,8 +697,8 @@ Ryan Zomorrodi
 <th rowspan="2" id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
 </tr>
 <tr class="gt_col_headings even">
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Not Depressed</strong><br> N = 3,643<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Depressed</strong><br> N = 286<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Yes</strong><br> N = 286<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>No</strong><br> N = 3,643<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -708,16 +715,16 @@ Ryan Zomorrodi
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Male</td>
 <td class="gt_row gt_center" headers="stat_0">3,685 (94%)</td>
-<td class="gt_row gt_center" headers="stat_1">3,430 (94%)</td>
-<td class="gt_row gt_center" headers="stat_2">255 (89%)</td>
+<td class="gt_row gt_center" headers="stat_1">255 (89%)</td>
+<td class="gt_row gt_center" headers="stat_2">3,430 (94%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Female</td>
 <td class="gt_row gt_center" headers="stat_0">244 (6.2%)</td>
-<td class="gt_row gt_center" headers="stat_1">213 (5.8%)</td>
-<td class="gt_row gt_center" headers="stat_2">31 (11%)</td>
+<td class="gt_row gt_center" headers="stat_1">31 (11%)</td>
+<td class="gt_row gt_center" headers="stat_2">213 (5.8%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -734,24 +741,24 @@ Ryan Zomorrodi
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Young adult</td>
 <td class="gt_row gt_center" headers="stat_0">428 (11%)</td>
-<td class="gt_row gt_center" headers="stat_1">386 (11%)</td>
-<td class="gt_row gt_center" headers="stat_2">42 (15%)</td>
+<td class="gt_row gt_center" headers="stat_1">42 (15%)</td>
+<td class="gt_row gt_center" headers="stat_2">386 (11%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Middle-aged adult</td>
 <td class="gt_row gt_center" headers="stat_0">1,432 (36%)</td>
-<td class="gt_row gt_center" headers="stat_1">1,289 (35%)</td>
-<td class="gt_row gt_center" headers="stat_2">143 (50%)</td>
+<td class="gt_row gt_center" headers="stat_1">143 (50%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,289 (35%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Older adult</td>
 <td class="gt_row gt_center" headers="stat_0">2,069 (53%)</td>
-<td class="gt_row gt_center" headers="stat_1">1,968 (54%)</td>
-<td class="gt_row gt_center" headers="stat_2">101 (35%)</td>
+<td class="gt_row gt_center" headers="stat_1">101 (35%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,968 (54%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -766,42 +773,42 @@ Ryan Zomorrodi
 <td class="gt_row gt_center" headers="p.value">0.004</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White</td>
-<td class="gt_row gt_center" headers="stat_0">2,378 (61%)</td>
-<td class="gt_row gt_center" headers="stat_1">2,233 (61%)</td>
-<td class="gt_row gt_center" headers="stat_2">145 (51%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Black</td>
 <td class="gt_row gt_center" headers="stat_0">949 (24%)</td>
-<td class="gt_row gt_center" headers="stat_1">870 (24%)</td>
-<td class="gt_row gt_center" headers="stat_2">79 (28%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mexican</td>
-<td class="gt_row gt_center" headers="stat_0">242 (6.2%)</td>
-<td class="gt_row gt_center" headers="stat_1">219 (6.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">23 (8.0%)</td>
+<td class="gt_row gt_center" headers="stat_1">79 (28%)</td>
+<td class="gt_row gt_center" headers="stat_2">870 (24%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other Hispanic</td>
-<td class="gt_row gt_center" headers="stat_0">176 (4.5%)</td>
-<td class="gt_row gt_center" headers="stat_1">156 (4.3%)</td>
-<td class="gt_row gt_center" headers="stat_2">20 (7.0%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Mexican</td>
+<td class="gt_row gt_center" headers="stat_0">242 (6.2%)</td>
+<td class="gt_row gt_center" headers="stat_1">23 (8.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">219 (6.0%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other and Multiracial</td>
 <td class="gt_row gt_center" headers="stat_0">184 (4.7%)</td>
-<td class="gt_row gt_center" headers="stat_1">165 (4.5%)</td>
-<td class="gt_row gt_center" headers="stat_2">19 (6.6%)</td>
+<td class="gt_row gt_center" headers="stat_1">19 (6.6%)</td>
+<td class="gt_row gt_center" headers="stat_2">165 (4.5%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="even">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other Hispanic</td>
+<td class="gt_row gt_center" headers="stat_0">176 (4.5%)</td>
+<td class="gt_row gt_center" headers="stat_1">20 (7.0%)</td>
+<td class="gt_row gt_center" headers="stat_2">156 (4.3%)</td>
+<td class="gt_row gt_center" headers="p.value"><br>
+</td>
+</tr>
+<tr class="odd">
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;White</td>
+<td class="gt_row gt_center" headers="stat_0">2,378 (61%)</td>
+<td class="gt_row gt_center" headers="stat_1">145 (51%)</td>
+<td class="gt_row gt_center" headers="stat_2">2,233 (61%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -824,30 +831,30 @@ Ryan Zomorrodi
 <h2>Summary of Selected Demographic Characteristics (cont.)</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="bcdcdbuzzb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#bcdcdbuzzb table {
+<div id="beozmccdtm" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#beozmccdtm table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#bcdcdbuzzb thead, #bcdcdbuzzb tbody, #bcdcdbuzzb tfoot, #bcdcdbuzzb tr, #bcdcdbuzzb td, #bcdcdbuzzb th {
+#beozmccdtm thead, #beozmccdtm tbody, #beozmccdtm tfoot, #beozmccdtm tr, #beozmccdtm td, #beozmccdtm th {
   border-style: none;
 }
 
-#bcdcdbuzzb p {
+#beozmccdtm p {
   margin: 0;
   padding: 0;
 }
 
-#bcdcdbuzzb .gt_table {
+#beozmccdtm .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -866,12 +873,12 @@ Ryan Zomorrodi
   border-left-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_caption {
+#beozmccdtm .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#bcdcdbuzzb .gt_title {
+#beozmccdtm .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -883,7 +890,7 @@ Ryan Zomorrodi
   border-bottom-width: 0;
 }
 
-#bcdcdbuzzb .gt_subtitle {
+#beozmccdtm .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -895,7 +902,7 @@ Ryan Zomorrodi
   border-top-width: 0;
 }
 
-#bcdcdbuzzb .gt_heading {
+#beozmccdtm .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -907,13 +914,13 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_bottom_border {
+#beozmccdtm .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_col_headings {
+#beozmccdtm .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -928,7 +935,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_col_heading {
+#beozmccdtm .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -948,7 +955,7 @@ Ryan Zomorrodi
   overflow-x: hidden;
 }
 
-#bcdcdbuzzb .gt_column_spanner_outer {
+#beozmccdtm .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -960,15 +967,15 @@ Ryan Zomorrodi
   padding-right: 4px;
 }
 
-#bcdcdbuzzb .gt_column_spanner_outer:first-child {
+#beozmccdtm .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bcdcdbuzzb .gt_column_spanner_outer:last-child {
+#beozmccdtm .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bcdcdbuzzb .gt_column_spanner {
+#beozmccdtm .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -980,11 +987,11 @@ Ryan Zomorrodi
   width: 100%;
 }
 
-#bcdcdbuzzb .gt_spanner_row {
+#beozmccdtm .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#bcdcdbuzzb .gt_group_heading {
+#beozmccdtm .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1010,7 +1017,7 @@ Ryan Zomorrodi
   text-align: left;
 }
 
-#bcdcdbuzzb .gt_empty_group_heading {
+#beozmccdtm .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1025,15 +1032,15 @@ Ryan Zomorrodi
   vertical-align: middle;
 }
 
-#bcdcdbuzzb .gt_from_md > :first-child {
+#beozmccdtm .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bcdcdbuzzb .gt_from_md > :last-child {
+#beozmccdtm .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bcdcdbuzzb .gt_row {
+#beozmccdtm .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1052,7 +1059,7 @@ Ryan Zomorrodi
   overflow-x: hidden;
 }
 
-#bcdcdbuzzb .gt_stub {
+#beozmccdtm .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1065,7 +1072,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#bcdcdbuzzb .gt_stub_row_group {
+#beozmccdtm .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1079,15 +1086,15 @@ Ryan Zomorrodi
   vertical-align: top;
 }
 
-#bcdcdbuzzb .gt_row_group_first td {
+#beozmccdtm .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bcdcdbuzzb .gt_row_group_first th {
+#beozmccdtm .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#bcdcdbuzzb .gt_summary_row {
+#beozmccdtm .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1097,16 +1104,16 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#bcdcdbuzzb .gt_first_summary_row {
+#beozmccdtm .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_first_summary_row.thick {
+#beozmccdtm .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bcdcdbuzzb .gt_last_summary_row {
+#beozmccdtm .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1116,7 +1123,7 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_grand_summary_row {
+#beozmccdtm .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1126,7 +1133,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#bcdcdbuzzb .gt_first_grand_summary_row {
+#beozmccdtm .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1136,7 +1143,7 @@ Ryan Zomorrodi
   border-top-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_last_grand_summary_row_top {
+#beozmccdtm .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1146,11 +1153,11 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_striped {
+#beozmccdtm .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bcdcdbuzzb .gt_table_body {
+#beozmccdtm .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1159,7 +1166,7 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_footnotes {
+#beozmccdtm .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1173,7 +1180,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_footnote {
+#beozmccdtm .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1182,7 +1189,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#bcdcdbuzzb .gt_sourcenotes {
+#beozmccdtm .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1196,7 +1203,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#bcdcdbuzzb .gt_sourcenote {
+#beozmccdtm .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1204,72 +1211,72 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#bcdcdbuzzb .gt_left {
+#beozmccdtm .gt_left {
   text-align: left;
 }
 
-#bcdcdbuzzb .gt_center {
+#beozmccdtm .gt_center {
   text-align: center;
 }
 
-#bcdcdbuzzb .gt_right {
+#beozmccdtm .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bcdcdbuzzb .gt_font_normal {
+#beozmccdtm .gt_font_normal {
   font-weight: normal;
 }
 
-#bcdcdbuzzb .gt_font_bold {
+#beozmccdtm .gt_font_bold {
   font-weight: bold;
 }
 
-#bcdcdbuzzb .gt_font_italic {
+#beozmccdtm .gt_font_italic {
   font-style: italic;
 }
 
-#bcdcdbuzzb .gt_super {
+#beozmccdtm .gt_super {
   font-size: 65%;
 }
 
-#bcdcdbuzzb .gt_footnote_marks {
+#beozmccdtm .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#bcdcdbuzzb .gt_asterisk {
+#beozmccdtm .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bcdcdbuzzb .gt_indent_1 {
+#beozmccdtm .gt_indent_1 {
   text-indent: 5px;
 }
 
-#bcdcdbuzzb .gt_indent_2 {
+#beozmccdtm .gt_indent_2 {
   text-indent: 10px;
 }
 
-#bcdcdbuzzb .gt_indent_3 {
+#beozmccdtm .gt_indent_3 {
   text-indent: 15px;
 }
 
-#bcdcdbuzzb .gt_indent_4 {
+#beozmccdtm .gt_indent_4 {
   text-indent: 20px;
 }
 
-#bcdcdbuzzb .gt_indent_5 {
+#beozmccdtm .gt_indent_5 {
   text-indent: 25px;
 }
 
-#bcdcdbuzzb .katex-display {
+#beozmccdtm .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#bcdcdbuzzb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#beozmccdtm div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1292,8 +1299,8 @@ Ryan Zomorrodi
 <th rowspan="2" id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
 </tr>
 <tr class="gt_col_headings even">
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Not Depressed</strong><br> N = 3,643<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Depressed</strong><br> N = 286<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Yes</strong><br> N = 286<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>No</strong><br> N = 3,643<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1310,28 +1317,20 @@ Ryan Zomorrodi
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Married</td>
 <td class="gt_row gt_center" headers="stat_0">2,479 (63%)</td>
-<td class="gt_row gt_center" headers="stat_1">2,335 (64%)</td>
-<td class="gt_row gt_center" headers="stat_2">144 (51%)</td>
+<td class="gt_row gt_center" headers="stat_1">144 (50%)</td>
+<td class="gt_row gt_center" headers="stat_2">2,335 (64%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Other</td>
-<td class="gt_row gt_center" headers="stat_0">1,441 (37%)</td>
-<td class="gt_row gt_center" headers="stat_1">1,302 (36%)</td>
-<td class="gt_row gt_center" headers="stat_2">139 (49%)</td>
+<td class="gt_row gt_center" headers="stat_0">1,450 (37%)</td>
+<td class="gt_row gt_center" headers="stat_1">142 (50%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,308 (36%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
-<td class="gt_row gt_center" headers="stat_0">9</td>
-<td class="gt_row gt_center" headers="stat_1">6</td>
-<td class="gt_row gt_center" headers="stat_2">3</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
-<tr class="odd">
 <td class="gt_row gt_left" headers="label" style="font-weight: bold">Education Level</td>
 <td class="gt_row gt_center" headers="stat_0"><br>
 </td>
@@ -1341,35 +1340,27 @@ Ryan Zomorrodi
 </td>
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
-<tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No high school diploma</td>
-<td class="gt_row gt_center" headers="stat_0">547 (14%)</td>
-<td class="gt_row gt_center" headers="stat_1">485 (13%)</td>
-<td class="gt_row gt_center" headers="stat_2">62 (22%)</td>
-<td class="gt_row gt_center" headers="p.value"><br>
-</td>
-</tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;High school graduate</td>
-<td class="gt_row gt_center" headers="stat_0">989 (25%)</td>
-<td class="gt_row gt_center" headers="stat_1">912 (25%)</td>
-<td class="gt_row gt_center" headers="stat_2">77 (27%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No high school diploma</td>
+<td class="gt_row gt_center" headers="stat_0">547 (19%)</td>
+<td class="gt_row gt_center" headers="stat_1">62 (30%)</td>
+<td class="gt_row gt_center" headers="stat_2">485 (18%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;College graduate or above</td>
-<td class="gt_row gt_center" headers="stat_0">2,380 (61%)</td>
-<td class="gt_row gt_center" headers="stat_1">2,236 (62%)</td>
-<td class="gt_row gt_center" headers="stat_2">144 (51%)</td>
+<td class="gt_row gt_center" headers="stat_0">2,380 (81%)</td>
+<td class="gt_row gt_center" headers="stat_1">144 (70%)</td>
+<td class="gt_row gt_center" headers="stat_2">2,236 (82%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
-<td class="gt_row gt_center" headers="stat_0">13</td>
-<td class="gt_row gt_center" headers="stat_1">10</td>
-<td class="gt_row gt_center" headers="stat_2">3</td>
+<td class="gt_row gt_center" headers="stat_0">1,002</td>
+<td class="gt_row gt_center" headers="stat_1">80</td>
+<td class="gt_row gt_center" headers="stat_2">922</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1392,30 +1383,30 @@ Ryan Zomorrodi
 <h2>Summary of Selected Clinical Characteristics</h2>
 <div class="cell">
 <div class="cell-output-display">
-<div id="cpomumfoyy" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#cpomumfoyy table {
+<div id="aasgoygunt" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#aasgoygunt table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#cpomumfoyy thead, #cpomumfoyy tbody, #cpomumfoyy tfoot, #cpomumfoyy tr, #cpomumfoyy td, #cpomumfoyy th {
+#aasgoygunt thead, #aasgoygunt tbody, #aasgoygunt tfoot, #aasgoygunt tr, #aasgoygunt td, #aasgoygunt th {
   border-style: none;
 }
 
-#cpomumfoyy p {
+#aasgoygunt p {
   margin: 0;
   padding: 0;
 }
 
-#cpomumfoyy .gt_table {
+#aasgoygunt .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
   margin-left: auto;
   margin-right: auto;
   color: #333333;
-  font-size: 16px;
+  font-size: 10px;
   font-weight: normal;
   font-style: normal;
   background-color: #FFFFFF;
@@ -1434,12 +1425,12 @@ Ryan Zomorrodi
   border-left-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_caption {
+#aasgoygunt .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#cpomumfoyy .gt_title {
+#aasgoygunt .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1451,7 +1442,7 @@ Ryan Zomorrodi
   border-bottom-width: 0;
 }
 
-#cpomumfoyy .gt_subtitle {
+#aasgoygunt .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1463,7 +1454,7 @@ Ryan Zomorrodi
   border-top-width: 0;
 }
 
-#cpomumfoyy .gt_heading {
+#aasgoygunt .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1475,13 +1466,13 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_bottom_border {
+#aasgoygunt .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_col_headings {
+#aasgoygunt .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1496,7 +1487,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_col_heading {
+#aasgoygunt .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1516,7 +1507,7 @@ Ryan Zomorrodi
   overflow-x: hidden;
 }
 
-#cpomumfoyy .gt_column_spanner_outer {
+#aasgoygunt .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1528,15 +1519,15 @@ Ryan Zomorrodi
   padding-right: 4px;
 }
 
-#cpomumfoyy .gt_column_spanner_outer:first-child {
+#aasgoygunt .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#cpomumfoyy .gt_column_spanner_outer:last-child {
+#aasgoygunt .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#cpomumfoyy .gt_column_spanner {
+#aasgoygunt .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1548,11 +1539,11 @@ Ryan Zomorrodi
   width: 100%;
 }
 
-#cpomumfoyy .gt_spanner_row {
+#aasgoygunt .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#cpomumfoyy .gt_group_heading {
+#aasgoygunt .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1578,7 +1569,7 @@ Ryan Zomorrodi
   text-align: left;
 }
 
-#cpomumfoyy .gt_empty_group_heading {
+#aasgoygunt .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1593,15 +1584,15 @@ Ryan Zomorrodi
   vertical-align: middle;
 }
 
-#cpomumfoyy .gt_from_md > :first-child {
+#aasgoygunt .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#cpomumfoyy .gt_from_md > :last-child {
+#aasgoygunt .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#cpomumfoyy .gt_row {
+#aasgoygunt .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1620,7 +1611,7 @@ Ryan Zomorrodi
   overflow-x: hidden;
 }
 
-#cpomumfoyy .gt_stub {
+#aasgoygunt .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1633,7 +1624,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#cpomumfoyy .gt_stub_row_group {
+#aasgoygunt .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1647,15 +1638,15 @@ Ryan Zomorrodi
   vertical-align: top;
 }
 
-#cpomumfoyy .gt_row_group_first td {
+#aasgoygunt .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#cpomumfoyy .gt_row_group_first th {
+#aasgoygunt .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#cpomumfoyy .gt_summary_row {
+#aasgoygunt .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1665,16 +1656,16 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#cpomumfoyy .gt_first_summary_row {
+#aasgoygunt .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_first_summary_row.thick {
+#aasgoygunt .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#cpomumfoyy .gt_last_summary_row {
+#aasgoygunt .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1684,7 +1675,7 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_grand_summary_row {
+#aasgoygunt .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1694,7 +1685,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#cpomumfoyy .gt_first_grand_summary_row {
+#aasgoygunt .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1704,7 +1695,7 @@ Ryan Zomorrodi
   border-top-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_last_grand_summary_row_top {
+#aasgoygunt .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1714,11 +1705,11 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_striped {
+#aasgoygunt .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#cpomumfoyy .gt_table_body {
+#aasgoygunt .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1727,7 +1718,7 @@ Ryan Zomorrodi
   border-bottom-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_footnotes {
+#aasgoygunt .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1741,7 +1732,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_footnote {
+#aasgoygunt .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1750,7 +1741,7 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#cpomumfoyy .gt_sourcenotes {
+#aasgoygunt .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1764,7 +1755,7 @@ Ryan Zomorrodi
   border-right-color: #D3D3D3;
 }
 
-#cpomumfoyy .gt_sourcenote {
+#aasgoygunt .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1772,72 +1763,72 @@ Ryan Zomorrodi
   padding-right: 5px;
 }
 
-#cpomumfoyy .gt_left {
+#aasgoygunt .gt_left {
   text-align: left;
 }
 
-#cpomumfoyy .gt_center {
+#aasgoygunt .gt_center {
   text-align: center;
 }
 
-#cpomumfoyy .gt_right {
+#aasgoygunt .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#cpomumfoyy .gt_font_normal {
+#aasgoygunt .gt_font_normal {
   font-weight: normal;
 }
 
-#cpomumfoyy .gt_font_bold {
+#aasgoygunt .gt_font_bold {
   font-weight: bold;
 }
 
-#cpomumfoyy .gt_font_italic {
+#aasgoygunt .gt_font_italic {
   font-style: italic;
 }
 
-#cpomumfoyy .gt_super {
+#aasgoygunt .gt_super {
   font-size: 65%;
 }
 
-#cpomumfoyy .gt_footnote_marks {
+#aasgoygunt .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#cpomumfoyy .gt_asterisk {
+#aasgoygunt .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#cpomumfoyy .gt_indent_1 {
+#aasgoygunt .gt_indent_1 {
   text-indent: 5px;
 }
 
-#cpomumfoyy .gt_indent_2 {
+#aasgoygunt .gt_indent_2 {
   text-indent: 10px;
 }
 
-#cpomumfoyy .gt_indent_3 {
+#aasgoygunt .gt_indent_3 {
   text-indent: 15px;
 }
 
-#cpomumfoyy .gt_indent_4 {
+#aasgoygunt .gt_indent_4 {
   text-indent: 20px;
 }
 
-#cpomumfoyy .gt_indent_5 {
+#aasgoygunt .gt_indent_5 {
   text-indent: 25px;
 }
 
-#cpomumfoyy .katex-display {
+#aasgoygunt .katex-display {
   display: inline-flex !important;
   margin-bottom: 0.75em !important;
 }
 
-#cpomumfoyy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+#aasgoygunt div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
   height: 0px !important;
 }
 </style>
@@ -1860,8 +1851,8 @@ Ryan Zomorrodi
 <th rowspan="2" id="p.value" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>p-value</strong><span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>2</sup></span></th>
 </tr>
 <tr class="gt_col_headings even">
-<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Not Depressed</strong><br> N = 3,643<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
-<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Depressed</strong><br> N = 286<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_1" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>Yes</strong><br> N = 286<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
+<th id="stat_2" class="gt_col_heading gt_columns_bottom_border gt_center" data-quarto-table-cell-role="th" scope="col"><strong>No</strong><br> N = 3,643<span class="gt_footnote_marks" style="white-space:nowrap;font-style:italic;font-weight:normal;line-height:0;"><sup>1</sup></span></th>
 </tr>
 </thead>
 <tbody class="gt_table_body">
@@ -1878,40 +1869,40 @@ Ryan Zomorrodi
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Underweight</td>
 <td class="gt_row gt_center" headers="stat_0">40 (1.0%)</td>
-<td class="gt_row gt_center" headers="stat_1">36 (1.0%)</td>
-<td class="gt_row gt_center" headers="stat_2">4 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_1">4 (1.4%)</td>
+<td class="gt_row gt_center" headers="stat_2">36 (1.0%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Normal</td>
 <td class="gt_row gt_center" headers="stat_0">842 (22%)</td>
-<td class="gt_row gt_center" headers="stat_1">778 (22%)</td>
-<td class="gt_row gt_center" headers="stat_2">64 (23%)</td>
+<td class="gt_row gt_center" headers="stat_1">64 (23%)</td>
+<td class="gt_row gt_center" headers="stat_2">778 (22%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Overweight</td>
 <td class="gt_row gt_center" headers="stat_0">1,489 (38%)</td>
-<td class="gt_row gt_center" headers="stat_1">1,418 (39%)</td>
-<td class="gt_row gt_center" headers="stat_2">71 (25%)</td>
+<td class="gt_row gt_center" headers="stat_1">71 (25%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,418 (39%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Obese</td>
 <td class="gt_row gt_center" headers="stat_0">1,502 (39%)</td>
-<td class="gt_row gt_center" headers="stat_1">1,361 (38%)</td>
-<td class="gt_row gt_center" headers="stat_2">141 (50%)</td>
+<td class="gt_row gt_center" headers="stat_1">141 (50%)</td>
+<td class="gt_row gt_center" headers="stat_2">1,361 (38%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
 <td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Unknown</td>
 <td class="gt_row gt_center" headers="stat_0">56</td>
-<td class="gt_row gt_center" headers="stat_1">50</td>
-<td class="gt_row gt_center" headers="stat_2">6</td>
+<td class="gt_row gt_center" headers="stat_1">6</td>
+<td class="gt_row gt_center" headers="stat_2">50</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1926,18 +1917,18 @@ Ryan Zomorrodi
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-<td class="gt_row gt_center" headers="stat_0">3,509 (89%)</td>
-<td class="gt_row gt_center" headers="stat_1">3,348 (92%)</td>
-<td class="gt_row gt_center" headers="stat_2">161 (56%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+<td class="gt_row gt_center" headers="stat_0">420 (11%)</td>
+<td class="gt_row gt_center" headers="stat_1">125 (44%)</td>
+<td class="gt_row gt_center" headers="stat_2">295 (8.1%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-<td class="gt_row gt_center" headers="stat_0">420 (11%)</td>
-<td class="gt_row gt_center" headers="stat_1">295 (8.1%)</td>
-<td class="gt_row gt_center" headers="stat_2">125 (44%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+<td class="gt_row gt_center" headers="stat_0">3,509 (89%)</td>
+<td class="gt_row gt_center" headers="stat_1">161 (56%)</td>
+<td class="gt_row gt_center" headers="stat_2">3,348 (92%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1952,18 +1943,18 @@ Ryan Zomorrodi
 <td class="gt_row gt_center" headers="p.value">&lt;0.001</td>
 </tr>
 <tr class="odd">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No</td>
-<td class="gt_row gt_center" headers="stat_0">2,764 (70%)</td>
-<td class="gt_row gt_center" headers="stat_1">2,679 (74%)</td>
-<td class="gt_row gt_center" headers="stat_2">85 (30%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
+<td class="gt_row gt_center" headers="stat_0">1,165 (30%)</td>
+<td class="gt_row gt_center" headers="stat_1">201 (70%)</td>
+<td class="gt_row gt_center" headers="stat_2">964 (26%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
 <tr class="even">
-<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;Yes</td>
-<td class="gt_row gt_center" headers="stat_0">1,165 (30%)</td>
-<td class="gt_row gt_center" headers="stat_1">964 (26%)</td>
-<td class="gt_row gt_center" headers="stat_2">201 (70%)</td>
+<td class="gt_row gt_left" headers="label">&nbsp;&nbsp;&nbsp;&nbsp;No</td>
+<td class="gt_row gt_center" headers="stat_0">2,764 (70%)</td>
+<td class="gt_row gt_center" headers="stat_1">85 (30%)</td>
+<td class="gt_row gt_center" headers="stat_2">2,679 (74%)</td>
 <td class="gt_row gt_center" headers="p.value"><br>
 </td>
 </tr>
@@ -1985,8 +1976,8 @@ Ryan Zomorrodi
 <section id="bivariate-analysis" class="slide level2">
 <h2>Bivariate Analysis</h2>
 <ul>
-<li>Depression is highest amongst young and middle-aged adults</li>
-<li>Depression is highest amongst people of color</li>
+<li>Depression is highest amongst young and middle-aged adults.</li>
+<li>Depression is highest amongst people of color.</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -2014,8 +2005,8 @@ Ryan Zomorrodi
 <section id="bivariate-analysis-1" class="slide level2">
 <h2>Bivariate Analysis</h2>
 <ul>
-<li>Depression is about 40% lower among married veterans</li>
-<li>Depression is much higher among those without a high school diploma</li>
+<li>Depression is about 40% lower among married veterans.</li>
+<li>Depression is much higher among those without a high school diploma.</li>
 </ul>
 <div class="columns">
 <div class="column" style="width:50%;">
@@ -2043,24 +2034,2457 @@ Ryan Zomorrodi
 <section id="bivariate-analysis-2" class="slide level2">
 <h2>Bivariate Analysis</h2>
 <ul>
-<li>Obesity is most prevalent amongst middle-aged individuals</li>
+<li>Obesity is most prevalent amongst middle-aged individuals.</li>
 </ul>
 
 <img data-src="slides_files/figure-revealjs/unnamed-chunk-9-1.png" width="960" class="r-stretch"></section>
 <section id="bivariate-analysis-3" class="slide level2">
 <h2>Bivariate Analysis</h2>
 <ul>
-<li>Younger veterans tend to have more education</li>
+<li>Younger veterans tend to have more education.</li>
 </ul>
 
 <img data-src="slides_files/figure-revealjs/unnamed-chunk-10-1.png" width="960" class="r-stretch"></section>
 <section id="bivariate-analysis-4" class="slide level2">
 <h2>Bivariate Analysis</h2>
 <ul>
-<li>Within this dataset, individuals with a history of trouble sleeping are also more likely to have memory problems</li>
+<li>Within this dataset, individuals with a history of trouble sleeping are also more likely to have memory problems.</li>
 </ul>
 
 <img data-src="slides_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="methods---logistic-regression" class="slide level2 smaller">
+<h2>## Methods - Logistic Regression</h2>
+<ul>
+<li>Imputation was performed with bagging</li>
+<li>Upsampling was conducted with Synthetic Minority Oversampling Technique (SMOTE)</li>
+<li>Feature Selection was performed by utilizing Bayesian optimization to tune
+<ul>
+<li>Elastic Net</li>
+<li>Random Forest</li>
+<li>Light GBM</li>
+</ul></li>
+<li>Voting method was used to only include model predictors within the top 50 most important in every model.</li>
+<li>Backwards selection regression model was fit on the remaining 30 features.</li>
+</ul>
+</section>
+<section id="methods---machine-learning" class="slide level2 smaller">
+<h2>Methods - Machine Learning</h2>
+<ul>
+<li>Feature Engineering
+<ul>
+<li>Combined <code>work_type</code> and <code>out_of_work</code> into one variable</li>
+<li>Replaced all cancer variables with <code>cancer_count</code></li>
+<li>Combined <code>arthritis_type</code> and <code>arthritis</code> into one variable</li>
+</ul></li>
+<li>Filtered features with near zero variation (categorical variables with the minority class with &lt; 10 observations)</li>
+<li>Split data into 75% training and 25% validation</li>
+<li>Training data was up-sampled using SMOTE</li>
+<li>Bagging imputation and normalization were performed as preprocessing to Elastic Net</li>
+<li>Feature Selection was performed over 5 cross validated folds by utilizing Bayesian optimization to tune
+<ul>
+<li>Elastic Net</li>
+<li>Random Forest</li>
+<li>Light GBM</li>
+</ul></li>
+</ul>
+</section>
+<section id="feature-selection" class="slide level2">
+<h2>Feature Selection</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="hgfdreuzox" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#hgfdreuzox table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#hgfdreuzox thead, #hgfdreuzox tbody, #hgfdreuzox tfoot, #hgfdreuzox tr, #hgfdreuzox td, #hgfdreuzox th {
+  border-style: none;
+}
+
+#hgfdreuzox p {
+  margin: 0;
+  padding: 0;
+}
+
+#hgfdreuzox .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#hgfdreuzox .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#hgfdreuzox .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#hgfdreuzox .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#hgfdreuzox .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#hgfdreuzox .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#hgfdreuzox .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#hgfdreuzox .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#hgfdreuzox .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#hgfdreuzox .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#hgfdreuzox .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#hgfdreuzox .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#hgfdreuzox .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#hgfdreuzox .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#hgfdreuzox .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hgfdreuzox .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#hgfdreuzox .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#hgfdreuzox .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#hgfdreuzox .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hgfdreuzox .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#hgfdreuzox .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hgfdreuzox .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#hgfdreuzox .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hgfdreuzox .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#hgfdreuzox .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#hgfdreuzox .gt_left {
+  text-align: left;
+}
+
+#hgfdreuzox .gt_center {
+  text-align: center;
+}
+
+#hgfdreuzox .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#hgfdreuzox .gt_font_normal {
+  font-weight: normal;
+}
+
+#hgfdreuzox .gt_font_bold {
+  font-weight: bold;
+}
+
+#hgfdreuzox .gt_font_italic {
+  font-style: italic;
+}
+
+#hgfdreuzox .gt_super {
+  font-size: 65%;
+}
+
+#hgfdreuzox .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#hgfdreuzox .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#hgfdreuzox .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#hgfdreuzox .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#hgfdreuzox .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#hgfdreuzox .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#hgfdreuzox .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#hgfdreuzox .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#hgfdreuzox div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div id="hgfdreuzox" class="reactable html-widget" style="width:auto;height:auto;"></div>
+<script type="application/json" data-for="hgfdreuzox">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"feature":["Trouble sleeping history","Memory problems","Can't work","Moderate Recreation","Out of work - Retired","Sleep hours","Out of Work - Health","Age - Older Adult","Bronchitis","Asthma relative","Limited work","Household income - 20,000 to 24,999","BMI - Overweight","Age","Walking Equipment","Education - College and above","Start Smoking Age","Arthritis","Race - White","Health Problem - Breathing","Full time work","Marijuana use","Healthcare equipment","Current smoker","Prescription Count","Triglyceride","Household size","GGT","BMI - Normal","Asthma"],"Elastic Net":[0.5233781887177,0.462631701836271,0.24043260246778,-0.131594541816268,-0.12921983036191,-0.12568598549659,0.124788711394671,-0.114282661971422,0.100165122272617,0.0950595952193526,0.0923960133491483,0.0674726187506227,-0.0660965608987035,-0.0651518533461932,0.0584481052987951,-0.0521761334212756,0.0454956956945034,0.0408546095498031,-0.0381064337678524,0.037843224881249,-0.037374468387414,0.0362217910755123,0.0329585649768047,0.0288152735130956,0.0201347353281785,0.0183424433273926,0.0141478233648587,-0.0132595042999695,0.0127948459393447,0.00445494518319389],"Light GBM":[100,81.2283040944316,65.034258816971,21.7113564653996,28.5539258225089,6.24749508518597,3.04856592831058,10.5430786293566,4.78042767666516,8.37950208673678,49.0753799559286,3.03663379593381,12.1646310690078,7.78368437630676,17.1730477509175,21.1621428395834,2.50113691527002,19.2722864091304,6.56640394499665,2.57003676154216,3.66091618106647,9.12211464704319,12.436074234023,2.46530622025447,2.76074939806824,3.43139652840402,5.97243285739385,2.50178872077614,7.34000182596403,5.065621741302],"Random Forest":[100,67.5788749266416,77.8113373465417,18.10607108462,34.3167697391325,5.21353428278182,6.3321503374466,11.6662526450691,5.48724101601919,6.75226609932602,51.5926607007171,2.74166336907763,9.49515686774439,9.24731307446828,21.4517403673203,12.3270560313143,2.96853154000562,16.9892756839931,4.07454253701162,3.36040736347945,2.53293973803161,5.61502648086932,16.9914645204861,2.33353749582213,3.53619158317792,3.11036739060515,4.18180890026461,2.32442739905388,3.68030915970429,4.81808112681109]},"columns":[{"id":"feature","name":"feature","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"left"},{"id":"Elastic Net","name":"Elastic Net","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"right"},{"id":"Light GBM","name":"Light GBM","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"right"},{"id":"Random Forest","name":"Random Forest","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","html":true,"align":"right"}],"defaultPageSize":10,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"16px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"hgfdreuzox","dataKey":"2214128ad8151671c00a82c72f81baf7"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style","tag.attribs.columns.3.style"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</section>
+<section id="results---logistic-regression" class="slide level2">
+<h2>Results - Logistic Regression</h2>
+<div class="cell">
+<div class="cell-output-display">
+<div id="szyxyrsmqy" class=".gt_table" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#szyxyrsmqy table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#szyxyrsmqy thead, #szyxyrsmqy tbody, #szyxyrsmqy tfoot, #szyxyrsmqy tr, #szyxyrsmqy td, #szyxyrsmqy th {
+  border-style: none;
+}
+
+#szyxyrsmqy p {
+  margin: 0;
+  padding: 0;
+}
+
+#szyxyrsmqy .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#szyxyrsmqy .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#szyxyrsmqy .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#szyxyrsmqy .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#szyxyrsmqy .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#szyxyrsmqy .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#szyxyrsmqy .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#szyxyrsmqy .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#szyxyrsmqy .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#szyxyrsmqy .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#szyxyrsmqy .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#szyxyrsmqy .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#szyxyrsmqy .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#szyxyrsmqy .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#szyxyrsmqy .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#szyxyrsmqy .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#szyxyrsmqy .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#szyxyrsmqy .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#szyxyrsmqy .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#szyxyrsmqy .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#szyxyrsmqy .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#szyxyrsmqy .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#szyxyrsmqy .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#szyxyrsmqy .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#szyxyrsmqy .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#szyxyrsmqy .gt_left {
+  text-align: left;
+}
+
+#szyxyrsmqy .gt_center {
+  text-align: center;
+}
+
+#szyxyrsmqy .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#szyxyrsmqy .gt_font_normal {
+  font-weight: normal;
+}
+
+#szyxyrsmqy .gt_font_bold {
+  font-weight: bold;
+}
+
+#szyxyrsmqy .gt_font_italic {
+  font-style: italic;
+}
+
+#szyxyrsmqy .gt_super {
+  font-size: 65%;
+}
+
+#szyxyrsmqy .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#szyxyrsmqy .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#szyxyrsmqy .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#szyxyrsmqy .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#szyxyrsmqy .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#szyxyrsmqy .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#szyxyrsmqy .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#szyxyrsmqy .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#szyxyrsmqy div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+<div id="szyxyrsmqy" class="reactable html-widget" style="width:100%;height:auto;"></div>
+<div style="font-family:system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;border-top-style:solid;border-top-width:2px;border-top-color:#D3D3D3;border-bottom-style:solid;border-bottom-width:2px;border-bottom-color:#D3D3D3;padding-top:6px;padding-bottom:6px;padding-left:10px;padding-right:10px;">
+<div>
+<div class="gt_sourcenotes">
+<div class="gt_sourcenote"><span data-qmd-base64="QWJicmV2aWF0aW9uczogQ0kgPSBDb25maWRlbmNlIEludGVydmFsLCBPUiA9IE9kZHMgUmF0aW8="><span class="gt_from_md">Abbreviations: CI = Confidence Interval, OR = Odds Ratio</span></span></div>
+</div>
+</div>
+<div></div>
+</div>
+<script type="application/json" data-for="szyxyrsmqy">{"x":{"tag":{"name":"Reactable","attribs":{"data":{"label":["trouble_sleeping_history","No","Yes","memory_problems","No","Yes","cant_work","No","Yes","moderate_recreation","No","Yes","work","Government","Private Wage Worker","Family Business","Self Employed","School","Retired","Layoff","Health","Disabled","Home Caretaker","Other","sleep_hours","age_class","Young adult","Middle-aged adult","Older adult","bronchitis","No","Yes","asthma_relative","No","Yes","limited_work","No","Yes","household_income","0 to 4999","5000 to 9999","10000 to 14999","15000 to 19999","20000 to 24999","25000 to 34999","35000 to 44999","45000 to 54999","55000 to 64999","65000 to 74999","75000 and Over","Over 20000","BMI_class","Underweight","Normal","Overweight","Obese","age","walking_equipment","No","Yes","education_level","No high school diploma","College graduate or above","start_smoking_age","arthritis_type","None","Osteoarthritis","Psoriatic","Rheumatoid","Other","race","Black","Mexican","Other and Multiracial","Other Hispanic","White","full_time_work","No","Yes","marijuana_use","No","Yes","current_smoker","prescriptions_count","triglyceride","household_size","GGT"],"estimate":["NA","NA",3.79079450718175,"NA","NA",4.97853127328354,"NA","NA",1.33551256349591,"NA","NA",0.58536949919263,"NA","NA",0.603323076270611,2.81400141229679,0.652386255336726,2.77589015504438,1.11550912231258,1.13620367833777,2.90870624495052,1.6155655009998,2.22739797538231,0.85938271981656,0.840973467317948,"NA","NA",0.675413589167685,0.517002313800899,"NA","NA",1.8867728005109,"NA","NA",1.2841071161484,"NA","NA",1.18013941799688,"NA","NA",0.820981522814269,1.52681113621162,0.737331816320808,1.04704740544884,0.665182433482014,0.599694038594563,0.909031186151983,0.326306144684452,0.513328968840771,0.247317709109597,0.274848716931708,"NA","NA",1.41001357695244,0.643898306033535,0.915138569820869,0.986265255514805,"NA","NA",1.51506856192648,"NA","NA",0.66942155691036,1.02765378097595,"NA","NA",1.48421277808258,0.240923962202636,0.897823001095029,1.35437231560896,"NA","NA",1.31874108266361,1.3524909140768,2.15349083769359,0.884046711817037,"NA","NA",1.56997453167651,"NA","NA",1.24034407431755,0.888698641361662,1.03657288464656,1.00175401336745,1.09004755357518,0.998018187345421],"conf.low":["NA","NA",3.30118658749891,"NA","NA",4.17051857912263,"NA","NA",1.08805005870961,"NA","NA",0.508612034031756,"NA","NA",0.460395384276657,0.894244076050717,0.432611548614241,1.44608768579996,0.821026945781617,0.575453070568084,1.94617548192455,1.14017791741354,1.1825587851392,0.496043964518874,0.80928455434717,"NA","NA",0.483286044524045,0.313818877572866,"NA","NA",1.5187927288656,"NA","NA",1.09214280933752,"NA","NA",0.979046723126401,"NA","NA",0.4154092133838,0.81284936616211,0.394973300058461,0.567522366269009,0.359624822083503,0.32269425816041,0.487195874593725,0.169321744458676,0.265204303269514,0.129851896826196,0.146114436473348,"NA","NA",0.779455477209176,0.355378146788058,0.504260696689426,0.974665621790753,"NA","NA",1.27111043379888,"NA","NA",0.566506250560994,1.01924372434312,"NA","NA",1.24842866862016,0.0549890852297971,0.713461729641829,1.01915073063012,"NA","NA",0.995053641135581,1.00464722280969,1.59996863257953,0.755096836030836,"NA","NA",1.31022591553398,"NA","NA",1.0150815542654,0.820626024200188,1.01471578623274,1.00089251330413,1.03736226929298,0.996668114100122],"p.value":["NA","NA",4.39824604394688e-79,"NA","NA",1.10723048682486e-69,"NA","NA",0.00563972086012753,"NA","NA",7.29518769884801e-14,"NA","NA",0.00025718215011854,0.0793004985552539,0.0397046485438999,0.00226039644522263,0.485920713732077,0.715597059961099,2.31083716322669e-07,0.00715205369751594,0.0138449988673275,0.589189294924603,7.51489109381516e-19,"NA","NA",0.021425926254439,0.00952356048455118,"NA","NA",1.09379248904573e-08,"NA","NA",0.00246933054093412,"NA","NA",0.0813890405274987,"NA","NA",0.564191057299766,0.179066942971985,0.327737745951796,0.880228914480053,0.18342173757221,0.0978571406529277,0.759231898060518,0.000639037822154851,0.0436261608225911,1.42509655336384e-05,4.21259132353977e-05,"NA","NA",0.256340809153734,0.146885669111563,0.770748050767449,0.0218865544431434,"NA","NA",3.52633704435529e-06,"NA","NA",2.38638404610149e-06,1.00322090558875e-10,"NA","NA",7.72199387707321e-06,0.0811677828206749,0.357721650969522,0.0373736516797399,"NA","NA",0.0540528212159724,0.0470328181602442,4.32123624235151e-07,0.125517202905771,"NA","NA",1.05969819022932e-06,"NA","NA",0.0353648526061137,0.00360775926452424,0.000986836604020781,6.32218800428246e-05,0.000652455833698135,0.0030879256893463]},"columns":[{"id":"label","name":"<span data-qmd-base64=\"PHN0cm9uZz5DaGFyYWN0ZXJpc3RpYzwvc3Ryb25nPg==\"><span class='gt_from_md'><strong>Characteristic<\/strong><\/span><\/span>","type":"character","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["Trouble Sleeping History","    No","    Yes","Memory Problems","    No","    Yes","Cant Work","    No","    Yes","Moderate Recreation","    No","    Yes","Work","    Government","    Private Wage Worker","    Family Business","    Self Employed","    School","    Retired","    Layoff","    Health","    Disabled","    Home Caretaker","    Other","Sleep Hours","Age","    Young adult","    Middle-aged adult","    Older adult","Bronchitis","    No","    Yes","Asthma Relative","    No","    Yes","Limited Work","    No","    Yes","Household Income","    0 to 4999","    5000 to 9999","    10000 to 14999","    15000 to 19999","    20000 to 24999","    25000 to 34999","    35000 to 44999","    45000 to 54999","    55000 to 64999","    65000 to 74999","    75000 and Over","    Over 20000","BMI","    Underweight","    Normal","    Overweight","    Obese","Age","Walking Equipment","    No","    Yes","Education Level","    No high school diploma","    College graduate or above","Start Smoking Age","Arthritis Type","    None","    Osteoarthritis","    Psoriatic","    Rheumatoid","    Other","Race","    Black","    Mexican","    Other and Multiracial","    Other Hispanic","    White","Full Time Work","    No","    Yes","Marijuana Use","    No","    Yes","Current Smoker","Prescriptions Count","Triglyceride","Household Size","GGT"],"html":true,"align":"left"},{"id":"estimate","name":"<span data-qmd-base64=\"PHN0cm9uZz5PUjwvc3Ryb25nPg==\"><span class='gt_from_md'><strong>OR<\/strong><\/span><\/span>","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["<br />","—","3.79","<br />","—","4.98","<br />","—","1.34","<br />","—","0.59","<br />","—","0.60","2.81","0.65","2.78","1.12","1.14","2.91","1.62","2.23","0.86","0.84","<br />","—","0.68","0.52","<br />","—","1.89","<br />","—","1.28","<br />","—","1.18","<br />","—","0.82","1.53","0.74","1.05","0.67","0.60","0.91","0.33","0.51","0.25","0.27","<br />","—","1.41","0.64","0.92","0.99","<br />","—","1.52","<br />","—","0.67","1.03","<br />","—","1.48","0.24","0.90","1.35","<br />","—","1.32","1.35","2.15","0.88","<br />","—","1.57","<br />","—","1.24","0.89","1.04","1.00","1.09","1.00"],"html":true,"align":"center"},{"id":"conf.low","name":"<span data-qmd-base64=\"PHN0cm9uZz45NSUgQ0k8L3N0cm9uZz4=\"><span class='gt_from_md'><strong>95% CI<\/strong><\/span><\/span>","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["<br />","—","3.30, 4.36","<br />","—","4.17, 5.96","<br />","—","1.09, 1.64","<br />","—","0.51, 0.67","<br />","—","0.46, 0.79","0.89, 9.15","0.43, 0.98","1.45, 5.38","0.82, 1.52","0.58, 2.28","1.95, 4.37","1.14, 2.29","1.18, 4.25","0.50, 1.49","0.81, 0.87","<br />","—","0.48, 0.94","0.31, 0.85","<br />","—","1.52, 2.35","<br />","—","1.09, 1.51","<br />","—","0.98, 1.42","<br />","—","0.42, 1.59","0.81, 2.80","0.39, 1.34","0.57, 1.88","0.36, 1.20","0.32, 1.08","0.49, 1.65","0.17, 0.61","0.27, 0.97","0.13, 0.46","0.15, 0.50","<br />","—","0.78, 2.56","0.36, 1.17","0.50, 1.67","0.97, 1.00","<br />","—","1.27, 1.81","<br />","—","0.57, 0.79","1.02, 1.04","<br />","—","1.25, 1.76","0.05, 1.28","0.71, 1.13","1.02, 1.80","<br />","—","1.00, 1.75","1.00, 1.82","1.60, 2.90","0.76, 1.04","<br />","—","1.31, 1.88","<br />","—","1.02, 1.52","0.82, 0.96","1.01, 1.06","1.00, 1.00","1.04, 1.15","1.00, 1.00"],"html":true,"align":"center"},{"id":"p.value","name":"<span data-qmd-base64=\"PHN0cm9uZz5wLXZhbHVlPC9zdHJvbmc+\"><span class='gt_from_md'><strong>p-value<\/strong><\/span><\/span>","type":"numeric","na":"NA","minWidth":125,"style":"function(rowInfo, colInfo) {\nconst rowIndex = rowInfo.index + 1\n}","cell":["<br />","<br />","<0.001","<br />","<br />","<0.001","<br />","<br />","0.006","<br />","<br />","<0.001","<br />","<br />","<0.001","0.079","0.040","0.002","0.5","0.7","<0.001","0.007","0.014","0.6","<0.001","<br />","<br />","0.021","0.010","<br />","<br />","<0.001","<br />","<br />","0.002","<br />","<br />","0.081","<br />","<br />","0.6","0.2","0.3","0.9","0.2","0.10","0.8","<0.001","0.044","<0.001","<0.001","<br />","<br />","0.3","0.15","0.8","0.022","<br />","<br />","<0.001","<br />","<br />","<0.001","<0.001","<br />","<br />","<0.001","0.081","0.4","0.037","<br />","<br />","0.054","0.047","<0.001","0.13","<br />","<br />","<0.001","<br />","<br />","0.035","0.004","<0.001","<0.001","<0.001","0.003"],"html":true,"align":"center"}],"defaultPageSize":15,"showPageSizeOptions":false,"pageSizeOptions":[10,25,50,100],"paginationType":"numbers","showPagination":true,"showPageInfo":true,"minRows":1,"width":"100%","height":"auto","theme":{"color":"#333333","backgroundColor":"#FFFFFF","stripedColor":"rgba(128,128,128,0.05)","style":{"font-family":"system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif","fontSize":"14px"},"tableStyle":{"borderTopStyle":"solid","borderTopWidth":"2px","borderTopColor":"#D3D3D3"},"headerStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"groupHeaderStyle":{"fontWeight":"normal","backgroundColor":"transparent","borderBottomStyle":"solid","borderBottomWidth":"2px","borderBottomColor":"#D3D3D3"},"cellStyle":{"fontWeight":"normal"}},"elementId":"szyxyrsmqy","dataKey":"1b6870ba39fbdba019071f2e6054f029"},"children":[]},"class":"reactR_markup"},"evals":["tag.attribs.columns.0.style","tag.attribs.columns.1.style","tag.attribs.columns.2.style","tag.attribs.columns.3.style"],"jsHooks":[]}</script>
+</div>
+</div>
+</div>
+</section>
+<section id="results---elastic-net" class="slide level2">
+<h2>Results - Elastic Net</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Lowest accuracy</li>
+<li>Second highest sensitivity</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="tatgqxxhsx" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#tatgqxxhsx table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#tatgqxxhsx thead, #tatgqxxhsx tbody, #tatgqxxhsx tfoot, #tatgqxxhsx tr, #tatgqxxhsx td, #tatgqxxhsx th {
+  border-style: none;
+}
+
+#tatgqxxhsx p {
+  margin: 0;
+  padding: 0;
+}
+
+#tatgqxxhsx .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#tatgqxxhsx .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#tatgqxxhsx .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#tatgqxxhsx .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#tatgqxxhsx .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#tatgqxxhsx .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#tatgqxxhsx .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#tatgqxxhsx .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#tatgqxxhsx .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#tatgqxxhsx .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#tatgqxxhsx .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#tatgqxxhsx .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#tatgqxxhsx .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#tatgqxxhsx .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#tatgqxxhsx .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tatgqxxhsx .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#tatgqxxhsx .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#tatgqxxhsx .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#tatgqxxhsx .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tatgqxxhsx .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#tatgqxxhsx .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tatgqxxhsx .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#tatgqxxhsx .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tatgqxxhsx .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#tatgqxxhsx .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#tatgqxxhsx .gt_left {
+  text-align: left;
+}
+
+#tatgqxxhsx .gt_center {
+  text-align: center;
+}
+
+#tatgqxxhsx .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#tatgqxxhsx .gt_font_normal {
+  font-weight: normal;
+}
+
+#tatgqxxhsx .gt_font_bold {
+  font-weight: bold;
+}
+
+#tatgqxxhsx .gt_font_italic {
+  font-style: italic;
+}
+
+#tatgqxxhsx .gt_super {
+  font-size: 65%;
+}
+
+#tatgqxxhsx .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#tatgqxxhsx .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#tatgqxxhsx .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#tatgqxxhsx .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#tatgqxxhsx .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#tatgqxxhsx .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#tatgqxxhsx .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#tatgqxxhsx .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#tatgqxxhsx div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="Accuracy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Accuracy</th>
+<th id="Sensitivity" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Sensitivity</th>
+<th id="Specificity" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Specificity</th>
+<th id="ROC-AUC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ROC AUC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Elastic Net</td>
+<td class="gt_row gt_right" headers="Accuracy">0.819</td>
+<td class="gt_row gt_right" headers="Sensitivity">0.732</td>
+<td class="gt_row gt_right" headers="Specificity">0.827</td>
+<td class="gt_row gt_right" headers="ROC AUC">0.845</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><img data-src="output/enet.png"></p>
+</div></div>
+</section>
+<section id="results---random-forest" class="slide level2">
+<h2>Results - Random Forest</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Low sensitivity</li>
+<li>Tied for highest ROC AUC</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="qjchlonfsw" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#qjchlonfsw table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#qjchlonfsw thead, #qjchlonfsw tbody, #qjchlonfsw tfoot, #qjchlonfsw tr, #qjchlonfsw td, #qjchlonfsw th {
+  border-style: none;
+}
+
+#qjchlonfsw p {
+  margin: 0;
+  padding: 0;
+}
+
+#qjchlonfsw .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#qjchlonfsw .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#qjchlonfsw .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#qjchlonfsw .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#qjchlonfsw .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#qjchlonfsw .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#qjchlonfsw .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#qjchlonfsw .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#qjchlonfsw .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#qjchlonfsw .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#qjchlonfsw .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#qjchlonfsw .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#qjchlonfsw .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#qjchlonfsw .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#qjchlonfsw .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjchlonfsw .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#qjchlonfsw .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#qjchlonfsw .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#qjchlonfsw .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjchlonfsw .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#qjchlonfsw .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjchlonfsw .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#qjchlonfsw .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjchlonfsw .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#qjchlonfsw .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#qjchlonfsw .gt_left {
+  text-align: left;
+}
+
+#qjchlonfsw .gt_center {
+  text-align: center;
+}
+
+#qjchlonfsw .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#qjchlonfsw .gt_font_normal {
+  font-weight: normal;
+}
+
+#qjchlonfsw .gt_font_bold {
+  font-weight: bold;
+}
+
+#qjchlonfsw .gt_font_italic {
+  font-style: italic;
+}
+
+#qjchlonfsw .gt_super {
+  font-size: 65%;
+}
+
+#qjchlonfsw .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#qjchlonfsw .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#qjchlonfsw .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#qjchlonfsw .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#qjchlonfsw .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#qjchlonfsw .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#qjchlonfsw .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#qjchlonfsw .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#qjchlonfsw div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="Accuracy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Accuracy</th>
+<th id="Sensitivity" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Sensitivity</th>
+<th id="Specificity" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Specificity</th>
+<th id="ROC-AUC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ROC AUC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Random Forest</td>
+<td class="gt_row gt_right" headers="Accuracy">0.933</td>
+<td class="gt_row gt_right" headers="Sensitivity">0.56</td>
+<td class="gt_row gt_right" headers="Specificity">0.968</td>
+<td class="gt_row gt_right" headers="ROC AUC">0.846</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><img data-src="output/rf.png"></p>
+</div></div>
+</section>
+<section id="results---light-gbm" class="slide level2">
+<h2>Results - Light GBM</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>Highest sensitivity</li>
+<li>Tied for highest ROC AUC</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="cell">
+<div class="cell-output-display">
+<div id="zrpljkjzsb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#zrpljkjzsb table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#zrpljkjzsb thead, #zrpljkjzsb tbody, #zrpljkjzsb tfoot, #zrpljkjzsb tr, #zrpljkjzsb td, #zrpljkjzsb th {
+  border-style: none;
+}
+
+#zrpljkjzsb p {
+  margin: 0;
+  padding: 0;
+}
+
+#zrpljkjzsb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: 100%;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#zrpljkjzsb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#zrpljkjzsb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#zrpljkjzsb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#zrpljkjzsb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#zrpljkjzsb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#zrpljkjzsb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#zrpljkjzsb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#zrpljkjzsb .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#zrpljkjzsb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#zrpljkjzsb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#zrpljkjzsb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#zrpljkjzsb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#zrpljkjzsb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#zrpljkjzsb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrpljkjzsb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#zrpljkjzsb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#zrpljkjzsb .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#zrpljkjzsb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrpljkjzsb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#zrpljkjzsb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrpljkjzsb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#zrpljkjzsb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrpljkjzsb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#zrpljkjzsb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#zrpljkjzsb .gt_left {
+  text-align: left;
+}
+
+#zrpljkjzsb .gt_center {
+  text-align: center;
+}
+
+#zrpljkjzsb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#zrpljkjzsb .gt_font_normal {
+  font-weight: normal;
+}
+
+#zrpljkjzsb .gt_font_bold {
+  font-weight: bold;
+}
+
+#zrpljkjzsb .gt_font_italic {
+  font-style: italic;
+}
+
+#zrpljkjzsb .gt_super {
+  font-size: 65%;
+}
+
+#zrpljkjzsb .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#zrpljkjzsb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#zrpljkjzsb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#zrpljkjzsb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#zrpljkjzsb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#zrpljkjzsb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#zrpljkjzsb .gt_indent_5 {
+  text-indent: 25px;
+}
+
+#zrpljkjzsb .katex-display {
+  display: inline-flex !important;
+  margin-bottom: 0.75em !important;
+}
+
+#zrpljkjzsb div.Reactable > div.rt-table > div.rt-thead > div.rt-tr.rt-tr-group-header > div.rt-th-group:after {
+  height: 0px !important;
+}
+</style>
+
+<table class="gt_table caption-top" data-quarto-postprocess="true" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+<thead>
+<tr class="gt_col_headings header">
+<th id="Model" class="gt_col_heading gt_columns_bottom_border gt_left" data-quarto-table-cell-role="th" scope="col">Model</th>
+<th id="Accuracy" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Accuracy</th>
+<th id="Sensitivity" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Sensitivity</th>
+<th id="Specificity" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">Specificity</th>
+<th id="ROC-AUC" class="gt_col_heading gt_columns_bottom_border gt_right" data-quarto-table-cell-role="th" scope="col">ROC AUC</th>
+</tr>
+</thead>
+<tbody class="gt_table_body">
+<tr class="odd">
+<td class="gt_row gt_left" headers="Model">Light GBM</td>
+<td class="gt_row gt_right" headers="Accuracy">0.925</td>
+<td class="gt_row gt_right" headers="Sensitivity">0.734</td>
+<td class="gt_row gt_right" headers="Specificity">0.943</td>
+<td class="gt_row gt_right" headers="ROC AUC">0.846</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<p><img data-src="output/lgbm.png"></p>
+</div></div>
+</section>
+<section id="limitations" class="slide level2">
+<h2>Limitations</h2>
+<ul>
+<li>Our sample is largely made up of older adults. Prediction performance may suffer for younger Iraq or Afgan War veterans.</li>
+<li>Individuals with low healthcare access may be diagnosed at lower rates and thus, our sample may have an inherit bias present within it.</li>
+</ul>
+</section>
 <section id="references" class="slide level2 smaller scrollable">
 <h2>References</h2>
 
